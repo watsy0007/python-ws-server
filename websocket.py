@@ -7,11 +7,8 @@ import redis
 from config import REDIS_URL, WS_HOST, WS_PORT
 from urllib.parse import urlparse
 
-logging.basicConfig()
 ticker_users = {}
-
 r = redis.StrictRedis.from_url(REDIS_URL)   
-
 self_id = 'ws_node:{}'.format(str(uuid.uuid4()))
 
 async def handle_ticker(websocket, query):
