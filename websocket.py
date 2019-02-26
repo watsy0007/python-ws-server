@@ -16,7 +16,7 @@ self_id = 'ws_node:{}'.format(str(uuid.uuid4()))
 
 async def handle_ticker(websocket, query):
     query = dict(map(lambda x: x.split('='), query.split('?')))
-    uid = str(uuid.uuid4())
+    uid = str(uuid.uuid4()) # uid 可以用参数代替, 表示来源
     r.sadd(self_id, uid)
     ticker_users[uid] = websocket
     await websocket.send('connected!')
