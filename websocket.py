@@ -29,9 +29,11 @@ async def remove_connect(websocket):
 async def handle_connect(websocket, path):
     r = urlparse(path)
     try:
+        # 实现路径处理, 可以和消息处理合并, 去掉路径处理
         if r.path == '/ticker':
             await handle_ticker(websocket, r.query)
         async for message in websocket:
+            # todo 实现消息处理
             print(message)
     except:
         print('what.....')
