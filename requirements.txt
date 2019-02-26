@@ -5,3 +5,4 @@ eventlet==0.24.1
 gunicorn==19.9.0
 redis==3.2.0
 websockets==7.0
+aredis==1.1.3
