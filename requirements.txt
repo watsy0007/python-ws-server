@@ -1,0 +1,6 @@
+websocket-client==0.54.0
+flask==1.0.2
+flask-socketio==3.3.1
+eventlet==0.24.1
+gunicorn==19.9.0
+redis==3.2.0
