@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import redis
 import eventlet
-from .config import REDIS_URL, SECRET_KEY
+from config import REDIS_URL, SECRET_KEY
 
 eventlet.monkey_patch(socket=True)
 
@@ -15,7 +15,7 @@ def handle_chat(message):
     socket_io.emit('my response', {'data': message['data'].decode()}, namespace='/chat')
 
 
-r = redis.StrictRedis(REDIS_URL)
+r = redis.StrictRedis.from_url(REDIS_URL)
 pub_sub = r.pubsub()
 pub_sub.subscribe(**{'chat': handle_chat})
 pub_sub.run_in_thread(0.05, True)
