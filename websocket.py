@@ -20,7 +20,6 @@ async def handle_ticker(websocket, query):
     print(uid, type(uid))
     r.sadd(self_id, uid)
     ticker_users[uid] = websocket
-    
 
 async def remove_connect(websocket):
     r.srem(self_id, ticker_users[websocket])
