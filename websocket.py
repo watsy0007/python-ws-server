@@ -4,7 +4,7 @@ import logging
 import websockets as ws
 import uuid
 import redis
-from config import REDIS_URL
+from config import REDIS_URL, WS_HOST, WS_PORT
 from urllib.parse import urlparse
 
 logging.basicConfig()
@@ -35,7 +35,7 @@ async def handle_connect(websocket, path):
 
 def run():
     try:
-        asyncio.get_event_loop().run_until_complete(ws.serve(handle_connect, 'localhost', 6789))
+        asyncio.get_event_loop().run_until_complete(ws.serve(handle_connect, WS_HOST, WS_PORT))
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
         print('del key', self_id)
