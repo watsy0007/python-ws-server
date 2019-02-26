@@ -42,9 +42,7 @@ async def send_ticker(data):
         await user.send(data)
 
 async def wait_for_message(pubsub, timeout=2, ignore_subscribe_messages=False):
-    now = time.time()
-    timeout = now + timeout
-    while now < timeout:
+    while True:
         message = await pubsub.get_message(
             ignore_subscribe_messages=ignore_subscribe_messages,
             timeout=1
@@ -53,7 +51,6 @@ async def wait_for_message(pubsub, timeout=2, ignore_subscribe_messages=False):
             if message['type'] == 'message' and message['channel'] == b'ticker':
                 await send_ticker(message['data'].decode())
         await asyncio.sleep(0.01)
-        now = time.time()
           
     return None
 
@@ -61,7 +58,7 @@ async def subscribe(rds, users):
     pubsub = rds.pubsub()
     assert pubsub.subscribed is False
     await pubsub.subscribe('ticker', 'chat')
-    await wait_for_message(pubsub, 10000)
+    await wait_for_message(pubsub)
 
 def run():
     try:
